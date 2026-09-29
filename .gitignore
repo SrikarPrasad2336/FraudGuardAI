@@ -1,0 +1,66 @@
+# Python
+backend/venv/
+backend/__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Datasets
+backend/data/*.csv
+backend/data/*.zip
+
+# Trained models
+backend/models/*.pkl
+backend/models/*.joblib
+
+# Jupyter
+.ipynb_checkpoints/
+
+# React
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+
+# Dataset
+backend/data/*.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Processed ML datasets
+backend/data/processed/
+
+.env
+backend/.env
+
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+backend/data/*.csv
+backend/data/processed/
+
+.ipynb_checkpoints/
+
+.vscode/
+.idea/

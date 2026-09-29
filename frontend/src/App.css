@@ -1,0 +1,795 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #172033;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.header {
+  background: #111827;
+  color: white;
+  padding: 28px 20px;
+}
+
+.header-content {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.header p {
+  margin: 8px 0 0;
+  color: #cbd5e1;
+}
+
+.main-container {
+  max-width: 1100px;
+  margin: 35px auto;
+  padding: 0 20px 50px;
+}
+
+.intro-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.intro-card h2 {
+  margin-top: 0;
+}
+
+.intro-card p {
+  color: #64748b;
+}
+
+
+/* Transaction Form */
+
+.transaction-form {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-section h3 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.input-group input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #2563eb;
+}
+
+.analyze-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.analyze-button:hover {
+  background: #1d4ed8;
+}
+
+.analyze-button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+
+/* Prediction */
+
+.prediction-card {
+  margin-top: 25px;
+  padding: 30px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.prediction-card.legitimate {
+  border-left: 6px solid #10b981;
+}
+
+.prediction-card.fraud {
+  border-left: 6px solid #ef4444;
+}
+
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prediction-label {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.prediction-header h2 {
+  margin: 5px 0 0;
+}
+
+.prediction-card.legitimate h2 {
+  color: #059669;
+}
+
+.prediction-card.fraud h2 {
+  color: #dc2626;
+}
+
+.risk-badge {
+  padding: 8px 15px;
+  border-radius: 20px;
+  background: #e2e8f0;
+  font-weight: 600;
+}
+
+.probability-section {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.probability-section strong {
+  font-size: 28px;
+}
+
+.threshold-info {
+  margin-top: 10px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+
+/* Explanation */
+
+.explanation-card {
+  margin-top: 25px;
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.explanation-card h2 {
+  margin-top: 0;
+}
+
+.explanation-description {
+  color: #64748b;
+}
+
+.feature-list {
+  margin-top: 20px;
+}
+
+.feature-item {
+  padding: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.feature-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.feature-info span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.impact {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.impact.positive {
+  color: #dc2626;
+}
+
+.impact.negative {
+  color: #059669;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .input-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 500px) {
+
+    .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+}
+
+.sample-button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  background: white;
+  color: #2563eb;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sample-button:hover {
+  background: #eff6ff;
+}
+
+.fraud-sample-button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #dc2626;
+  border-radius: 8px;
+  background: white;
+  color: #dc2626;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fraud-sample-button:hover {
+  background: #fef2f2;
+}
+
+/* Prediction History */
+
+.history-card {
+  margin-top: 25px;
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.history-header h2 {
+  margin: 0;
+}
+
+.history-header p {
+  margin: 7px 0 0;
+  color: #64748b;
+}
+
+.clear-history-button {
+  border: 1px solid #dc2626;
+  background: white;
+  color: #dc2626;
+  padding: 9px 15px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.clear-history-button:hover {
+  background: #fef2f2;
+}
+
+.history-table-wrapper {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th {
+  text-align: left;
+  padding: 13px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 14px;
+}
+
+.history-table td {
+  padding: 13px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.history-legitimate {
+  color: #059669;
+  font-weight: 700;
+}
+
+.history-fraud {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.risk-label {
+  padding: 5px 10px;
+  border-radius: 15px;
+  background: #f1f5f9;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.empty-history {
+  color: #64748b;
+}
+
+/* Dashboard Statistics */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  border-left: 5px solid #2563eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.stat-label {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 28px;
+  color: #172033;
+}
+
+.fraud-stat {
+  border-left-color: #dc2626;
+}
+
+.fraud-stat .stat-value {
+  color: #dc2626;
+}
+
+.legitimate-stat {
+  border-left-color: #059669;
+}
+
+.legitimate-stat .stat-value {
+  color: #059669;
+}
+
+.risk-stat {
+  border-left-color: #7c3aed;
+}
+
+.risk-stat .stat-value {
+  color: #7c3aed;
+}
+
+.probability-section {
+  margin-top: 25px;
+}
+
+.probability-section > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.probability-section strong {
+  font-size: 28px;
+}
+
+.probability-bar {
+  width: 100%;
+  height: 12px;
+  margin-top: 12px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.probability-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.safe-fill {
+  background: #10b981;
+}
+
+.fraud-fill {
+  background: #ef4444;
+}
+
+.risk-badge.low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.risk-badge.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.risk-badge.high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Quick Test */
+
+.quick-test-section {
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.quick-test-section h3 {
+  margin: 0 0 5px;
+}
+
+.quick-test-section p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.sample-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.sample-button,
+.fraud-sample-button {
+  width: auto;
+  margin: 0;
+  padding: 11px 18px;
+}
+
+
+/* Section Heading */
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.section-heading h3 {
+  margin-bottom: 5px;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+
+/* Input descriptions */
+
+.input-description {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+
+/* Basic Inputs */
+
+.basic-inputs {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+
+/* Advanced section */
+
+.advanced-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 18px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  background: #f8fafc;
+  color: #172033;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.advanced-toggle:hover {
+  background: #f1f5f9;
+}
+
+.advanced-content {
+  margin-top: 18px;
+}
+
+.advanced-description {
+  padding: 12px 15px;
+
+  background: #eff6ff;
+  border-radius: 8px;
+
+  color: #475569;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Header */
+
+.header {
+  background: #111827;
+  color: white;
+  padding: 22px 20px;
+}
+
+.header-content {
+  max-width: 1100px;
+  margin: auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.header p {
+  margin: 4px 0 0;
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background: #1f2937;
+
+  color: #d1fae5;
+
+  font-size: 13px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #10b981;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #2563eb;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.intro-card h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+.intro-card p {
+  max-width: 750px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.model-info-card {
+  margin-top: 25px;
+  padding: 25px;
+
+  background: white;
+
+  border-radius: 14px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.model-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.model-info-header h2 {
+  margin: 0;
+}
+
+.model-status {
+  padding: 6px 12px;
+
+  border-radius: 15px;
+
+  background: #dcfce7;
+
+  color: #166534;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.model-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+}
+
+.model-info-grid div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.model-info-grid span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.model-info-grid strong {
+  font-size: 16px;
+}
+
+@media (max-width: 700px) {
+
+  .model-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sample-buttons {
+    flex-direction: column;
+  }
+
+  .sample-button,
+  .fraud-sample-button {
+    width: 100%;
+  }
+
+}
