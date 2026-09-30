@@ -10,7 +10,6 @@ backend/data/*.zip
 
 # Trained models
 backend/models/*.pkl
-backend/models/*.joblib
 
 # Jupyter
 .ipynb_checkpoints/
@@ -47,7 +46,10 @@ backend/data/*.csv
 .idea/
 
 # Processed ML datasets
-backend/data/processed/
+backend/data/processed/*
+!backend/data/processed/
+!backend/data/processed/scaler.joblib
+
 
 .env
 backend/.env
