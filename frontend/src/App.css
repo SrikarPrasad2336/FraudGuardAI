@@ -1,688 +1,182 @@
+/* =========================================================
+   FraudGuard AI
+   Professional Fintech Dashboard UI
+   ========================================================= */
+
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+
+  --text: #172033;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-soft: #eff6ff;
+
+  --success: #059669;
+  --success-soft: #dcfce7;
+
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+
+  --purple: #7c3aed;
+  --border: #e2e8f0;
+
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
+  --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.09);
+
+  --radius: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #172033;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  background: var(--bg);
+  color: var(--text);
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .app {
   min-height: 100vh;
 }
 
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .header {
-  background: #111827;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a 0%,
+      #111827 50%,
+      #172554 100%
+    );
+
   color: white;
-  padding: 28px 20px;
+
+  padding: 18px 24px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 4px 20px rgba(15, 23, 42, 0.16);
 }
 
 .header-content {
-  max-width: 1100px;
-  margin: auto;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 32px;
-}
-
-.header p {
-  margin: 8px 0 0;
-  color: #cbd5e1;
-}
-
-.main-container {
-  max-width: 1100px;
-  margin: 35px auto;
-  padding: 0 20px 50px;
-}
-
-.intro-card {
-  background: white;
-  padding: 25px;
-  border-radius: 14px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.intro-card h2 {
-  margin-top: 0;
-}
-
-.intro-card p {
-  color: #64748b;
-}
-
-
-/* Transaction Form */
-
-.transaction-form {
-  background: white;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.form-section {
-  margin-bottom: 30px;
-}
-
-.form-section h3 {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 10px;
-}
-
-.input-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.input-group label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #475569;
-}
-
-.input-group input {
-  padding: 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 7px;
-  font-size: 14px;
-  outline: none;
-}
-
-.input-group input:focus {
-  border-color: #2563eb;
-}
-
-.analyze-button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.analyze-button:hover {
-  background: #1d4ed8;
-}
-
-.analyze-button:disabled {
-  background: #94a3b8;
-  cursor: not-allowed;
-}
-
-
-/* Prediction */
-
-.prediction-card {
-  margin-top: 25px;
-  padding: 30px;
-  border-radius: 14px;
-  background: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.prediction-card.legitimate {
-  border-left: 6px solid #10b981;
-}
-
-.prediction-card.fraud {
-  border-left: 6px solid #ef4444;
-}
-
-.prediction-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.prediction-label {
-  color: #64748b;
-  font-size: 14px;
-}
-
-.prediction-header h2 {
-  margin: 5px 0 0;
-}
-
-.prediction-card.legitimate h2 {
-  color: #059669;
-}
-
-.prediction-card.fraud h2 {
-  color: #dc2626;
-}
-
-.risk-badge {
-  padding: 8px 15px;
-  border-radius: 20px;
-  background: #e2e8f0;
-  font-weight: 600;
-}
-
-.probability-section {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.probability-section strong {
-  font-size: 28px;
-}
-
-.threshold-info {
-  margin-top: 10px;
-  color: #64748b;
-  font-size: 13px;
-}
-
-
-/* Explanation */
-
-.explanation-card {
-  margin-top: 25px;
-  background: white;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.explanation-card h2 {
-  margin-top: 0;
-}
-
-.explanation-description {
-  color: #64748b;
-}
-
-.feature-list {
-  margin-top: 20px;
-}
-
-.feature-item {
-  padding: 15px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.feature-info {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.feature-info span {
-  color: #64748b;
-  font-size: 14px;
-}
-
-.impact {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.impact.positive {
-  color: #dc2626;
-}
-
-.impact.negative {
-  color: #059669;
-}
-
-.error-message {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  background: #fee2e2;
-  color: #b91c1c;
-}
-
-
-/* Responsive */
-
-@media (max-width: 900px) {
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .input-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-@media (max-width: 500px) {
-
-    .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-
-  .input-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .prediction-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-}
-
-.sample-button {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border: 1px solid #2563eb;
-  border-radius: 8px;
-  background: white;
-  color: #2563eb;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.sample-button:hover {
-  background: #eff6ff;
-}
-
-.fraud-sample-button {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border: 1px solid #dc2626;
-  border-radius: 8px;
-  background: white;
-  color: #dc2626;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.fraud-sample-button:hover {
-  background: #fef2f2;
-}
-
-/* Prediction History */
-
-.history-card {
-  margin-top: 25px;
-  background: white;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.history-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.history-header h2 {
-  margin: 0;
-}
-
-.history-header p {
-  margin: 7px 0 0;
-  color: #64748b;
-}
-
-.clear-history-button {
-  border: 1px solid #dc2626;
-  background: white;
-  color: #dc2626;
-  padding: 9px 15px;
-  border-radius: 7px;
-  cursor: pointer;
-}
-
-.clear-history-button:hover {
-  background: #fef2f2;
-}
-
-.history-table-wrapper {
-  overflow-x: auto;
-}
-
-.history-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.history-table th {
-  text-align: left;
-  padding: 13px;
-  background: #f8fafc;
-  color: #475569;
-  font-size: 14px;
-}
-
-.history-table td {
-  padding: 13px;
-  border-bottom: 1px solid #e2e8f0;
-  font-size: 14px;
-}
-
-.history-legitimate {
-  color: #059669;
-  font-weight: 700;
-}
-
-.history-fraud {
-  color: #dc2626;
-  font-weight: 700;
-}
-
-.risk-label {
-  padding: 5px 10px;
-  border-radius: 15px;
-  background: #f1f5f9;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.empty-history {
-  color: #64748b;
-}
-
-/* Dashboard Statistics */
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  margin-bottom: 25px;
-}
-
-.stat-card {
-  background: white;
-  padding: 22px;
-  border-radius: 14px;
-  border-left: 5px solid #2563eb;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.stat-label {
-  display: block;
-  color: #64748b;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.stat-value {
-  display: block;
-  font-size: 28px;
-  color: #172033;
-}
-
-.fraud-stat {
-  border-left-color: #dc2626;
-}
-
-.fraud-stat .stat-value {
-  color: #dc2626;
-}
-
-.legitimate-stat {
-  border-left-color: #059669;
-}
-
-.legitimate-stat .stat-value {
-  color: #059669;
-}
-
-.risk-stat {
-  border-left-color: #7c3aed;
-}
-
-.risk-stat .stat-value {
-  color: #7c3aed;
-}
-
-.probability-section {
-  margin-top: 25px;
-}
-
-.probability-section > div:first-child {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.probability-section strong {
-  font-size: 28px;
-}
-
-.probability-bar {
-  width: 100%;
-  height: 12px;
-  margin-top: 12px;
-  background: #e2e8f0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.probability-fill {
-  height: 100%;
-  border-radius: 10px;
-  transition: width 0.5s ease;
-}
-
-.safe-fill {
-  background: #10b981;
-}
-
-.fraud-fill {
-  background: #ef4444;
-}
-
-.risk-badge.low {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.risk-badge.medium {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.risk-badge.high {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-/* Quick Test */
-
-.quick-test-section {
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-}
-
-.quick-test-section h3 {
-  margin: 0 0 5px;
-}
-
-.quick-test-section p {
-  margin: 0;
-  color: #64748b;
-  font-size: 14px;
-}
-
-.sample-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.sample-button,
-.fraud-sample-button {
-  width: auto;
-  margin: 0;
-  padding: 11px 18px;
-}
-
-
-/* Section Heading */
-
-.section-heading {
-  margin-bottom: 20px;
-}
-
-.section-heading h3 {
-  margin-bottom: 5px;
-}
-
-.section-heading p {
-  margin: 0;
-  color: #64748b;
-  font-size: 14px;
-}
-
-
-/* Input descriptions */
-
-.input-description {
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-
-/* Basic Inputs */
-
-.basic-inputs {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-
-/* Advanced section */
-
-.advanced-toggle {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 16px 18px;
-
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-
-  background: #f8fafc;
-  color: #172033;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.advanced-toggle:hover {
-  background: #f1f5f9;
-}
-
-.advanced-content {
-  margin-top: 18px;
-}
-
-.advanced-description {
-  padding: 12px 15px;
-
-  background: #eff6ff;
-  border-radius: 8px;
-
-  color: #475569;
-
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* Header */
-
-.header {
-  background: #111827;
-  color: white;
-  padding: 22px 20px;
-}
-
-.header-content {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: auto;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  gap: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 14px;
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 10px;
+  border-radius: 13px;
 
-  background: #2563eb;
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #4f46e5
+    );
 
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.35);
 }
 
 .header h1 {
   margin: 0;
-  font-size: 25px;
+
+  font-size: 24px;
+  font-weight: 750;
+
+  letter-spacing: -0.4px;
 }
 
 .header p {
   margin: 4px 0 0;
+
   color: #cbd5e1;
-  font-size: 13px;
+
+  font-size: 12px;
 }
 
 .system-status {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
 
-  padding: 7px 12px;
+  padding: 8px 13px;
 
-  border-radius: 20px;
+  border-radius: 999px;
 
-  background: #1f2937;
+  background: rgba(16, 185, 129, 0.1);
 
-  color: #d1fae5;
+  border: 1px solid rgba(16, 185, 129, 0.22);
 
-  font-size: 13px;
+  color: #a7f3d0;
+
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .status-dot {
@@ -692,45 +186,931 @@ body {
   border-radius: 50%;
 
   background: #10b981;
+
+  box-shadow:
+    0 0 0 4px rgba(16, 185, 129, 0.12);
+
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(16, 185, 129, 0.35);
+  }
+
+  70% {
+    box-shadow:
+      0 0 0 7px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.main-container {
+  max-width: 1180px;
+
+  margin: 0 auto;
+
+  padding:
+    32px 24px 70px;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.intro-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8fbff 100%
+    );
+
+  padding: 32px;
+
+  border-radius: var(--radius);
+
+  margin-bottom: 24px;
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow-md);
+}
+
+.intro-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  right: -70px;
+  top: -90px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37, 99, 235, 0.12),
+      rgba(37, 99, 235, 0)
+    );
 }
 
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
 
-  margin-bottom: 8px;
+  align-items: center;
 
-  color: #2563eb;
+  margin-bottom: 10px;
+
+  color: var(--primary);
 
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
 }
 
 .intro-card h2 {
-  margin: 0 0 8px;
-  font-size: 25px;
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 10px;
+
+  font-size: 29px;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.8px;
 }
 
 .intro-card p {
-  max-width: 750px;
+  position: relative;
+  z-index: 1;
+
+  max-width: 800px;
+
   margin: 0;
+
+  color: var(--text-secondary);
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   DASHBOARD STATISTICS
+   ========================================================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: var(--surface);
+
+  padding: 22px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--border);
+
+  border-left: 4px solid var(--primary);
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 80px;
+  height: 80px;
+
+  right: -30px;
+  bottom: -35px;
+
+  border-radius: 50%;
+
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.stat-label {
+  display: block;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  margin-bottom: 9px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+.stat-value {
+  display: block;
+
+  font-size: 28px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: var(--text);
+}
+
+.fraud-stat {
+  border-left-color: var(--danger);
+}
+
+.fraud-stat .stat-value {
+  color: var(--danger);
+}
+
+.legitimate-stat {
+  border-left-color: var(--success);
+}
+
+.legitimate-stat .stat-value {
+  color: var(--success);
+}
+
+.risk-stat {
+  border-left-color: var(--purple);
+}
+
+.risk-stat .stat-value {
+  color: var(--purple);
+}
+
+
+/* =========================================================
+   TRANSACTION FORM
+   ========================================================= */
+
+.transaction-form {
+  background: var(--surface);
+
+  padding: 30px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow-md);
+
+  margin-bottom: 24px;
+}
+
+.form-section {
+  margin-bottom: 28px;
+}
+
+.form-section h3 {
+  margin: 0 0 18px;
+
+  padding-bottom: 12px;
+
+  border-bottom: 1px solid var(--border);
+
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h3 {
+  margin: 0 0 5px;
+
+  border: none;
+
+  padding: 0;
+}
+
+.section-heading p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.input-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+.basic-inputs {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.input-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.input-group label {
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.input-group input {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.input-group input:hover {
+  border-color: #94a3b8;
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+
+  background: #fbfdff;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.input-description {
+  color: var(--text-muted);
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   QUICK TEST
+   ========================================================= */
+
+.quick-test-section {
+  padding: 20px;
+
+  margin-bottom: 28px;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fafc,
+      #f1f5f9
+    );
+
+  border: 1px solid var(--border);
+}
+
+.quick-test-section h3 {
+  margin: 0 0 5px;
+
+  font-size: 16px;
+}
+
+.quick-test-section p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+
+.sample-buttons {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 17px;
+}
+
+.sample-button,
+.fraud-sample-button {
+  width: auto;
+
+  margin: 0;
+
+  padding: 11px 17px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.sample-button {
+  border: 1px solid #93c5fd;
+
+  background: #ffffff;
+
+  color: var(--primary);
+}
+
+.sample-button:hover {
+  background: var(--primary-soft);
+
+  border-color: var(--primary);
+
+  transform: translateY(-1px);
+}
+
+.fraud-sample-button {
+  border: 1px solid #fca5a5;
+
+  background: #ffffff;
+
+  color: var(--danger);
+}
+
+.fraud-sample-button:hover {
+  background: #fff5f5;
+
+  border-color: var(--danger);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ADVANCED SECTION
+   ========================================================= */
+
+.advanced-toggle {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 17px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 9px;
+
+  background: var(--surface-soft);
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.advanced-toggle:hover {
+  background: #f1f5f9;
+
+  border-color: #cbd5e1;
+}
+
+.advanced-content {
+  margin-top: 17px;
+}
+
+.advanced-description {
+  padding: 12px 15px;
+
+  background: var(--primary-soft);
+
+  border-radius: 9px;
+
+  color: #475569;
+
+  font-size: 12px;
+
   line-height: 1.6;
 }
 
-.model-info-card {
+
+/* =========================================================
+   ANALYZE BUTTON
+   ========================================================= */
+
+.analyze-button {
+  width: 100%;
+
+  padding: 15px 18px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.22);
+}
+
+.analyze-button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #1d4ed8,
+      #1e40af
+    );
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+.analyze-button:active {
+  transform: translateY(0);
+}
+
+.analyze-button:disabled {
+  background: #94a3b8;
+
+  box-shadow: none;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-message {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 18px;
+  margin-bottom: 5px;
+
+  padding: 14px 16px;
+
+  border-radius: 10px;
+
+  background: var(--danger-soft);
+
+  border: 1px solid #fecaca;
+
+  color: #b91c1c;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PREDICTION CARD
+   ========================================================= */
+
+.prediction-card {
+  margin-top: 24px;
+
+  padding: 28px;
+
+  border-radius: var(--radius);
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow-md);
+}
+
+.prediction-card.legitimate {
+  border-left: 5px solid var(--success);
+}
+
+.prediction-card.fraud {
+  border-left: 5px solid var(--danger);
+}
+
+.prediction-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.prediction-label {
+  color: var(--text-secondary);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+.prediction-header h2 {
+  margin: 6px 0 0;
+
+  font-size: 21px;
+
+  letter-spacing: -0.3px;
+}
+
+.prediction-card.legitimate h2 {
+  color: var(--success);
+}
+
+.prediction-card.fraud h2 {
+  color: var(--danger);
+}
+
+.risk-badge {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: #e2e8f0;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+
+  white-space: nowrap;
+}
+
+.risk-badge.low {
+  background: var(--success-soft);
+
+  color: #166534;
+}
+
+.risk-badge.medium {
+  background: var(--warning-soft);
+
+  color: #92400e;
+}
+
+.risk-badge.high {
+  background: var(--danger-soft);
+
+  color: #991b1b;
+}
+
+
+/* =========================================================
+   PROBABILITY
+   ========================================================= */
+
+.probability-section {
   margin-top: 25px;
-  padding: 25px;
+}
 
-  background: white;
+.probability-section > div:first-child {
+  display: flex;
 
-  border-radius: 14px;
+  justify-content: space-between;
 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  align-items: center;
+
+  gap: 15px;
+}
+
+.probability-section strong {
+  font-size: 29px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.7px;
+}
+
+.probability-bar {
+  width: 100%;
+
+  height: 12px;
+
+  margin-top: 12px;
+
+  background: #e2e8f0;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.probability-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  transition: width 0.7s ease;
+}
+
+.safe-fill {
+  background:
+    linear-gradient(
+      90deg,
+      #10b981,
+      #34d399
+    );
+}
+
+.fraud-fill {
+  background:
+    linear-gradient(
+      90deg,
+      #ef4444,
+      #f87171
+    );
+}
+
+.threshold-info {
+  margin-top: 9px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   SHAP EXPLANATION
+   ========================================================= */
+
+.explanation-card {
+  margin-top: 24px;
+
+  background: var(--surface);
+
+  padding: 28px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow-md);
+}
+
+.explanation-card h2 {
+  margin: 0 0 7px;
+
+  font-size: 19px;
+}
+
+.explanation-description {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.feature-list {
+  margin-top: 20px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 11px;
+
+  overflow: hidden;
+}
+
+.feature-item {
+  padding: 15px 17px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid var(--border);
+
+  transition: background 0.2s ease;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item:hover {
+  background: #f8fafc;
+}
+
+.feature-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 8px;
+}
+
+.feature-info strong {
+  font-size: 13px;
+}
+
+.feature-info span {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+.impact {
+  font-size: 11px;
+
+  font-weight: 750;
+}
+
+.impact.positive {
+  color: var(--danger);
+}
+
+.impact.negative {
+  color: var(--success);
+}
+
+
+/* =========================================================
+   MODEL INFORMATION
+   ========================================================= */
+
+.model-info-card {
+  margin-top: 24px;
+
+  padding: 26px;
+
+  background: var(--surface);
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow-md);
 }
 
 .model-info-header {
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   margin-bottom: 20px;
@@ -738,49 +1118,286 @@ body {
 
 .model-info-header h2 {
   margin: 0;
+
+  font-size: 19px;
 }
 
 .model-status {
-  padding: 6px 12px;
+  padding: 7px 12px;
 
-  border-radius: 15px;
+  border-radius: 999px;
 
-  background: #dcfce7;
+  background: var(--success-soft);
 
   color: #166534;
 
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+
+  font-weight: 800;
 }
 
 .model-info-grid {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 
-  gap: 20px;
+  gap: 15px;
 }
 
 .model-info-grid div {
   display: flex;
+
   flex-direction: column;
 
   gap: 6px;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
 }
 
 .model-info-grid span {
-  color: #64748b;
-  font-size: 13px;
+  color: var(--text-secondary);
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
 }
 
 .model-info-grid strong {
-  font-size: 16px;
+  font-size: 15px;
 }
+
+
+/* =========================================================
+   PREDICTION HISTORY
+   ========================================================= */
+
+.history-card {
+  margin-top: 24px;
+
+  background: var(--surface);
+
+  padding: 28px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow-md);
+}
+
+.history-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.history-header h2 {
+  margin: 0;
+
+  font-size: 19px;
+}
+
+.history-header p {
+  margin: 6px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+.clear-history-button {
+  border: 1px solid #fca5a5;
+
+  background: white;
+
+  color: var(--danger);
+
+  padding: 8px 13px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.clear-history-button:hover {
+  background: #fff5f5;
+
+  border-color: var(--danger);
+}
+
+.history-table-wrapper {
+  overflow-x: auto;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+}
+
+.history-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 600px;
+}
+
+.history-table th {
+  text-align: left;
+
+  padding: 12px 14px;
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+.history-table td {
+  padding: 13px 14px;
+
+  border-top: 1px solid var(--border);
+
+  font-size: 12px;
+}
+
+.history-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.history-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.history-legitimate {
+  color: var(--success);
+
+  font-weight: 800;
+}
+
+.history-fraud {
+  color: var(--danger);
+
+  font-weight: 800;
+}
+
+.risk-label {
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  background: #f1f5f9;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+.empty-history {
+  padding: 20px 0;
+
+  color: var(--text-secondary);
+
+  text-align: center;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .main-container {
+    padding:
+      25px 18px 55px;
+  }
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .input-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
 
 @media (max-width: 700px) {
 
-  .model-info-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .header {
+    padding: 15px 16px;
+  }
+
+  .header-content {
+    align-items: flex-start;
+  }
+
+  .system-status {
+    font-size: 10px;
+
+    padding: 6px 9px;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+
+    font-size: 19px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .header p {
+    font-size: 10px;
+  }
+
+  .intro-card {
+    padding: 24px;
+  }
+
+  .intro-card h2 {
+    font-size: 23px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .input-grid,
+  .basic-inputs {
+    grid-template-columns: 1fr;
   }
 
   .sample-buttons {
@@ -792,4 +1409,58 @@ body {
     width: 100%;
   }
 
+  .model-info-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .prediction-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .history-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .clear-history-button {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .main-container {
+    padding:
+      18px 12px 40px;
+  }
+
+  .intro-card,
+  .transaction-form,
+  .prediction-card,
+  .explanation-card,
+  .model-info-card,
+  .history-card {
+    padding: 20px;
+  }
+
+  .model-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-header h2 {
+    font-size: 18px;
+  }
+
+  .probability-section strong {
+    font-size: 25px;
+  }
+
+  .system-status {
+    display: none;
+  }
 }
