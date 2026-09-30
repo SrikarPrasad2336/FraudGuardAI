@@ -18,7 +18,9 @@ app.add_middleware(
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:4173",
-    "http://127.0.0.1:4173"
+    "http://127.0.0.1:4173",
+    "https://fraudguardai-en77.onrender.com"
+
 ],
     allow_credentials=True,
     allow_methods=["*"],
