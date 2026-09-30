@@ -1464,3 +1464,371 @@ button {
     display: none;
   }
 }
+
+/* =========================================================
+   ENHANCED DASHBOARD STATS
+   ========================================================= */
+
+.stat-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  border-radius: 9px;
+
+  background: var(--primary-soft);
+
+  color: var(--primary);
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.fraud-stat .stat-icon {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.legitimate-stat .stat-icon {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.risk-stat .stat-icon {
+  background: #ede9fe;
+  color: var(--purple);
+}
+
+.stat-description {
+  display: block;
+
+  margin-top: 9px;
+
+  color: var(--text-muted);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   MODEL INFORMATION
+   ========================================================= */
+
+.model-subtitle {
+  margin: 5px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CURRENT DEPLOYED MODEL
+   ========================================================= */
+
+.current-model-banner {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff,
+      #f8fafc
+    );
+
+  border: 1px solid #dbeafe;
+}
+
+.current-model-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--primary);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.current-model-banner > div:first-child strong {
+  display: block;
+
+  font-size: 20px;
+
+  color: var(--text);
+}
+
+.current-model-metrics {
+  display: flex;
+
+  gap: 25px;
+}
+
+.current-model-metrics div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.current-model-metrics span {
+  color: var(--text-secondary);
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+.current-model-metrics strong {
+  font-size: 15px;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   MODEL PERFORMANCE
+   ========================================================= */
+
+.performance-section {
+  margin-top: 28px;
+
+  padding-top: 25px;
+
+  border-top: 1px solid var(--border);
+}
+
+.performance-heading {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 17px;
+}
+
+.performance-heading h3 {
+  margin: 0 0 5px;
+
+  font-size: 17px;
+}
+
+.performance-heading p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+.metric-note {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: var(--surface-soft);
+
+  color: var(--text-secondary);
+
+  border: 1px solid var(--border);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   MODEL COMPARISON CARDS
+   ========================================================= */
+
+.model-comparison-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.model-comparison-card {
+  padding: 18px;
+
+  border-radius: 12px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.model-comparison-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.model-comparison-card.selected-model {
+  border-color: #93c5fd;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff,
+      #ffffff
+    );
+
+  box-shadow:
+    0 5px 18px rgba(37, 99, 235, 0.08);
+}
+
+.comparison-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding-bottom: 13px;
+
+  margin-bottom: 13px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-header h4 {
+  margin: 0 0 4px;
+
+  font-size: 14px;
+}
+
+.comparison-header span {
+  color: var(--text-muted);
+
+  font-size: 10px;
+}
+
+.selected-badge {
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  background: var(--primary);
+
+  color: white !important;
+
+  font-size: 8px !important;
+
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+}
+
+.metric-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+.metric-row div {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.metric-row span {
+  color: var(--text-secondary);
+
+  font-size: 10px;
+}
+
+.metric-row strong {
+  font-size: 11px;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   RESPONSIVE MODEL SECTION
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .current-model-banner {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .current-model-metrics {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 15px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .model-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .performance-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .current-model-metrics {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
