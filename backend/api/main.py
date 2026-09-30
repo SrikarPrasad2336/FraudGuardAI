@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import pandas as pd
 from pathlib import Path
-
+import json
 from api.model_service import predict_transaction
 
 app = FastAPI(
@@ -25,6 +25,10 @@ app.add_middleware(
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATASET_PATH = BASE_DIR / "data" / "creditcard.csv"
+SAMPLES_DIR = BASE_DIR / "data" / "samples"
+LEGITIMATE_SAMPLE_PATH = SAMPLES_DIR / "legitimate_sample.json"
+FRAUD_SAMPLE_PATH = SAMPLES_DIR / "fraud_sample.json"
+
 
 class TransactionRequest(BaseModel):
     Time: float
@@ -79,119 +83,35 @@ def health():
 def sample_transaction():
 
     try:
-        df = pd.read_csv(DATASET_PATH)
-
-        sample = df.iloc[0]
-
-        transaction = {
-            feature: float(sample[feature])
-            for feature in [
-                "Time",
-                "V1",
-                "V2",
-                "V3",
-                "V4",
-                "V5",
-                "V6",
-                "V7",
-                "V8",
-                "V9",
-                "V10",
-                "V11",
-                "V12",
-                "V13",
-                "V14",
-                "V15",
-                "V16",
-                "V17",
-                "V18",
-                "V19",
-                "V20",
-                "V21",
-                "V22",
-                "V23",
-                "V24",
-                "V25",
-                "V26",
-                "V27",
-                "V28",
-                "Amount"
-            ]
-        }
+        with open(LEGITIMATE_SAMPLE_PATH, "r") as f:
+            transaction = json.load(f)
 
         return transaction
 
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=str(e)
+            detail=f"Unable to load legitimate sample: {str(e)}"
         )
 
+    
 @app.get("/sample-fraud-transaction")
 def sample_fraud_transaction():
 
     try:
-        df = pd.read_csv(DATASET_PATH)
-
-        fraud_rows = df[df["Class"] == 1]
-
-        if fraud_rows.empty:
-            raise HTTPException(
-                status_code=404,
-                detail="No fraud transactions found"
-            )
-
-        sample = fraud_rows.iloc[0]
-
-        features = [
-            "Time",
-            "V1",
-            "V2",
-            "V3",
-            "V4",
-            "V5",
-            "V6",
-            "V7",
-            "V8",
-            "V9",
-            "V10",
-            "V11",
-            "V12",
-            "V13",
-            "V14",
-            "V15",
-            "V16",
-            "V17",
-            "V18",
-            "V19",
-            "V20",
-            "V21",
-            "V22",
-            "V23",
-            "V24",
-            "V25",
-            "V26",
-            "V27",
-            "V28",
-            "Amount"
-        ]
-
-        transaction = {
-            feature: float(sample[feature])
-            for feature in features
-        }
+        with open(FRAUD_SAMPLE_PATH, "r") as f:
+            transaction = json.load(f)
 
         return transaction
-
-    except HTTPException:
-        raise
 
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=str(e)
+            detail=f"Unable to load fraud sample: {str(e)}"
         )
 
+
+    
 @app.get("/model-info")
 def model_info():
     return {

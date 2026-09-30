@@ -11,6 +11,10 @@ import ModelInfo from "./components/ModelInfo";
 import "./App.css";
 
 
+// Deployed FastAPI backend
+const API_URL = "https://fraudguard-ai-backend-h2k8.onrender.com";
+
+
 function App() {
 
   const [result, setResult] = useState(null);
@@ -18,177 +22,219 @@ function App() {
   const [error, setError] = useState("");
 
   const [history, setHistory] = useState(() => {
-  const savedHistory = localStorage.getItem(
-    "fraudguard_history"
-  );
-
-  return savedHistory
-    ? JSON.parse(savedHistory)
-    : [];
-});
-
-useEffect(() => {
-  localStorage.setItem(
-    "fraudguard_history",
-    JSON.stringify(history)
-  );
-}, [history]);
-
-const clearHistory = () => {
-  setHistory([]);
-};
-
-  const loadFraudSample = async () => {
-  try {
-    setError("");
-
-    const response = await axios.get(
-      "http://127.0.0.1:8000/sample-fraud-transaction"
+    const savedHistory = localStorage.getItem(
+      "fraudguard_history"
     );
 
-    return response.data;
+    return savedHistory
+      ? JSON.parse(savedHistory)
+      : [];
+  });
 
-  } catch (err) {
-    console.error(err);
 
-    setError(
-      "Unable to load fraud sample transaction."
+  // Save prediction history to localStorage
+  useEffect(() => {
+    localStorage.setItem(
+      "fraudguard_history",
+      JSON.stringify(history)
     );
+  }, [history]);
 
-    return null;
-  }
-};
 
+  // Clear prediction history
+  const clearHistory = () => {
+    setHistory([]);
+  };
+
+
+  // Load legitimate sample transaction
   const loadSampleTransaction = async () => {
-  try {
+
+    try {
+
+      setError("");
+
+      const response = await axios.get(
+        `${API_URL}/sample-transaction`
+      );
+
+      return response.data;
+
+    } catch (err) {
+
+      console.error(err);
+
+      setError(
+        "Unable to load sample transaction."
+      );
+
+      return null;
+    }
+  };
+
+
+  // Load fraud sample transaction
+  const loadFraudSample = async () => {
+
+    try {
+
+      setError("");
+
+      const response = await axios.get(
+        `${API_URL}/sample-fraud-transaction`
+      );
+
+      return response.data;
+
+    } catch (err) {
+
+      console.error(err);
+
+      setError(
+        "Unable to load fraud sample transaction."
+      );
+
+      return null;
+    }
+  };
+
+
+  // Analyze transaction
+  const analyzeTransaction = async (transaction) => {
+
+    setLoading(true);
     setError("");
+    setResult(null);
 
-    const response = await axios.get(
-      "http://127.0.0.1:8000/sample-transaction"
-    );
+    try {
 
-    return response.data;
+      const response = await axios.post(
+        `${API_URL}/predict`,
+        transaction
+      );
 
-  } catch (err) {
-    console.error(err);
+      const predictionResult = response.data;
 
-    setError(
-      "Unable to load sample transaction."
-    );
+      setResult(predictionResult);
 
-    return null;
-  }
-};
 
-const analyzeTransaction = async (transaction) => {
+      // Add prediction to history
+      const historyItem = {
+        id: Date.now(),
+        time: new Date().toLocaleTimeString(),
+        prediction: predictionResult.prediction,
+        label: predictionResult.label,
+        fraud_probability:
+          predictionResult.fraud_probability,
+        risk_level:
+          predictionResult.risk_level
+      };
 
-  setLoading(true);
-  setError("");
-  setResult(null);
 
-  try {
+      setHistory((previousHistory) => [
+        historyItem,
+        ...previousHistory
+      ]);
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/predict",
-      transaction
-    );
+    } catch (err) {
 
-    const predictionResult = response.data;
+      console.error(err);
 
-    setResult(predictionResult);
+      setError(
+        "Unable to analyze the transaction. Please check the backend connection."
+      );
 
-    const historyItem = {
-      id: Date.now(),
-      time: new Date().toLocaleTimeString(),
-      prediction: predictionResult.prediction,
-      label: predictionResult.label,
-      fraud_probability:
-        predictionResult.fraud_probability,
-      risk_level: predictionResult.risk_level
-    };
+    } finally {
 
-    setHistory((previousHistory) => [
-      historyItem,
-      ...previousHistory
-    ]);
+      setLoading(false);
 
-  } catch (err) {
-
-    console.error(err);
-
-    setError(
-      "Unable to analyze the transaction. Please check that the backend is running."
-    );
-
-  } finally {
-
-    setLoading(false);
-
-  }
-};
+    }
+  };
 
 
   return (
 
     <div className="app">
 
+
+      {/* Header */}
+
       <header className="header">
 
-  <div className="header-content">
+        <div className="header-content">
 
-    <div className="brand">
+          <div className="brand">
 
-      <div className="brand-icon">
-        F
-      </div>
+            <div className="brand-icon">
+              F
+            </div>
 
-      <div>
-        <h1>FraudGuard AI</h1>
+            <div>
 
-        <p>
-          Explainable Credit Card Fraud Detection
-        </p>
-      </div>
+              <h1>
+                FraudGuard AI
+              </h1>
 
-    </div>
+              <p>
+                Explainable Credit Card Fraud Detection
+              </p>
 
-    <div className="system-status">
-      <span className="status-dot"></span>
-      System Online
-    </div>
+            </div>
 
-  </div>
+          </div>
 
-</header>
+
+          <div className="system-status">
+
+            <span className="status-dot"></span>
+
+            System Online
+
+          </div>
+
+        </div>
+
+      </header>
+
 
       <main className="main-container">
 
+
+        {/* Introduction */}
+
         <section className="intro-card">
 
-  <div>
+          <div>
 
-    <span className="eyebrow">
-      MACHINE LEARNING FRAUD ANALYSIS
-    </span>
+            <span className="eyebrow">
+              MACHINE LEARNING FRAUD ANALYSIS
+            </span>
 
-    <h2>
-      Analyze a Credit Card Transaction
-    </h2>
+            <h2>
+              Analyze a Credit Card Transaction
+            </h2>
 
-    <p>
-      FraudGuard AI uses a trained Random Forest model
-      to estimate fraud probability and SHAP explainability
-      to show which features influenced the prediction.
-    </p>
+            <p>
+              FraudGuard AI uses a trained Random Forest
+              model to estimate fraud probability and SHAP
+              explainability to show which features influenced
+              the prediction.
+            </p>
 
-  </div>
+          </div>
 
-</section>
+        </section>
+
+
+        {/* Dashboard Statistics */}
 
         <DashboardStats
-  history={history}
-  currentResult={result}
-/>
+          history={history}
+          currentResult={result}
+        />
+
+
+        {/* Transaction Form */}
 
         <TransactionForm
           onAnalyze={analyzeTransaction}
@@ -197,6 +243,8 @@ const analyzeTransaction = async (transaction) => {
           loading={loading}
         />
 
+
+        {/* Error */}
 
         {error && (
 
@@ -207,22 +255,32 @@ const analyzeTransaction = async (transaction) => {
         )}
 
 
-        <PredictionCard result={result} />
+        {/* Prediction */}
+
+        <PredictionCard
+          result={result}
+        />
 
 
-        <ExplanationCard result={result} />
+        {/* SHAP Explanation */}
+
+        <ExplanationCard
+          result={result}
+        />
+
+
+        {/* Model Information */}
 
         <ModelInfo />
 
-<PredictionHistory
-  history={history}
-  onClear={clearHistory}
-/>
+
+        {/* Prediction History */}
 
         <PredictionHistory
-  history={history}
-  onClear={clearHistory}
-/>
+          history={history}
+          onClear={clearHistory}
+        />
+
 
       </main>
 
