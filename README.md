@@ -1,44 +1,116 @@
 # FraudGuard AI
 
-## Explainable Credit Card Fraud Detection System
+## Explainable Real-Time Financial Fraud Detection System
 
-FraudGuard AI is a machine learning based fraud detection application that analyzes credit card transactions and predicts whether a transaction is potentially fraudulent.
+FraudGuard AI is a machine learning based credit card fraud detection system that analyzes transaction data, predicts the probability of fraud, assigns a risk level, and explains the prediction using SHAP.
 
-The system combines a Random Forest classifier with SHAP explainability to provide both a prediction and an explanation of the features that influenced the prediction.
+The system combines a React frontend, FastAPI backend, machine learning models, and SHAP explainability into a complete web application.
 
-## Features
+## Live Demo
 
-- Credit card fraud detection
-- Random Forest classification
-- SMOTE for imbalanced training data
-- Fraud probability prediction
+Frontend:
+
+https://fraudguardai-en77.onrender.com
+
+Backend API:
+
+https://fraudguard-ai-backend-h2k8.onrender.com
+
+API Documentation:
+
+https://fraudguard-ai-backend-h2k8.onrender.com/docs
+
+---
+
+# Features
+
+- Real-time transaction fraud prediction
+- Random Forest based fraud detection
+- Fraud probability estimation
 - Configurable fraud decision threshold
+- Low, Medium, and High risk classification
 - SHAP based explainability
-- Individual transaction explanations
+- Top contributing features for every prediction
+- Legitimate transaction sample
+- Fraud transaction sample
+- Prediction history using browser local storage
+- Model performance dashboard
+- Responsive React interface
 - FastAPI REST API
-- React dashboard
-- Sample legitimate and fraud transactions
-- Prediction history
-- Risk classification
+- Cloud deployment using Render
 
-## Architecture
+---
+
+# System Architecture
 
 ```text
-React Frontend
-       |
-       | HTTP / Axios
-       v
-FastAPI Backend
-       |
-       v
-Preprocessing
-       |
-       v
-Random Forest Model
-       |
-       +---------> Fraud Probability
-       |
-       +---------> SHAP Explanation
-       |
-       v
-Prediction + Risk + Explanation
+                         USER
+                           |
+                           v
+              +-------------------------+
+              |     React Frontend      |
+              |        Vite             |
+              +-----------+-------------+
+                          |
+                          | HTTPS REST API
+                          v
+              +-------------------------+
+              |     FastAPI Backend     |
+              +-----------+-------------+
+                          |
+              +-----------+-----------+
+              |                       |
+              v                       v
+      +---------------+       +---------------+
+      | Random Forest |       |     SHAP      |
+      |     Model     |       | Explainability|
+      +-------+-------+       +-------+-------+
+              |                       |
+              +-----------+-----------+
+                          |
+                          v
+                Prediction + Risk
+                 + Explanation
+
+
+              MACHINE LEARNING PIPELINE
+
+
+              Credit Card Dataset
+        |
+        v
+Data Validation
+        |
+        v
+Duplicate Removal
+        |
+        v
+Train / Validation / Test Split
+        |
+        v
+Feature Scaling
+        |
+        v
+SMOTE on Training Data
+        |
+        +-------------------+
+        |                   |
+        v                   v
+Logistic Regression    Random Forest
+        |                   |
+        v                   v
+    XGBoost          Isolation Forest
+        |                   |
+        +---------+---------+
+                  |
+                  v
+          Model Evaluation
+                  |
+                  v
+           Random Forest
+                  |
+                  v
+               SHAP
+                  |
+                  v
+       Explainable Prediction
